@@ -1,36 +1,35 @@
 import React from 'react';
 
+interface ExamplePromptsProps {
+  sendMessage?: (event: React.UIEvent, messageInput?: string) => void;
+}
+
 const EXAMPLE_PROMPTS = [
-  { text: 'Create a mobile app about bolt.diy' },
-  { text: 'Build a todo app in React using Tailwind' },
-  { text: 'Build a simple blog using Astro' },
-  { text: 'Create a cookie consent form using Material UI' },
-  { text: 'Make a space invaders game' },
-  { text: 'Make a Tic Tac Toe game in html, css and js only' },
+  { text: 'Build a physics sandbox where I drop objects and they bounce, roll, and collide realistically' },
+  { text: 'Create a bridge builder: I place beams between points, then test if my bridge holds a truck' },
+  { text: 'Make a circuit simulator with batteries, resistors, LEDs and wires I can connect together' },
+  { text: 'Build a 3D solar system I can rotate and zoom into, with real planet sizes and orbit speeds' },
+  { text: 'Create a robot arm simulator where I control each joint with sliders and pick up objects' },
+  { text: 'Make a gear train calculator: I set gear sizes and it shows how speed and torque change' },
+  { text: 'Build a marble run designer where I place ramps, loops and funnels then watch the marble go' },
+  { text: 'Create a simple rocket launch simulator with adjustable thrust, angle, and fuel amount' },
 ];
 
-export function ExamplePrompts(sendMessage?: { (event: React.UIEvent, messageInput?: string): void | undefined }) {
+export function ExamplePrompts({ sendMessage }: ExamplePromptsProps) {
   return (
     <div id="examples" className="relative flex flex-col gap-9 w-full max-w-3xl mx-auto flex justify-center mt-6">
-      <div
-        className="flex flex-wrap justify-center gap-2"
-        style={{
-          animation: '.25s ease-out 0s 1 _fade-and-move-in_g2ptj_1 forwards',
-        }}
-      >
-        {EXAMPLE_PROMPTS.map((examplePrompt, index: number) => {
-          return (
-            <button
-              key={index}
-              onClick={(event) => {
-                sendMessage?.(event, examplePrompt.text);
-              }}
-              className="border border-bolt-elements-borderColor rounded-full bg-gray-50 hover:bg-gray-100 dark:bg-gray-950 dark:hover:bg-gray-900 text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary px-3 py-1 text-xs transition-theme"
-            >
-              {examplePrompt.text}
-            </button>
-          );
-        })}
+      <div className="flex flex-wrap justify-center gap-2">
+        {EXAMPLE_PROMPTS.map((examplePrompt, index) => (
+          <button
+            key={index}
+            onClick={(event) => {
+              sendMessage?.(event, examplePrompt.text);
+            }}
+            className="border border-bolt-elements-borderColor rounded-full bg-gray-50 hover:bg-gray-100 dark:bg-bolt-elements-background-depth-1 dark:hover:bg-bolt-elements-background-depth-2 text-bolt-elements-textSecondary hover:text-bolt-elements-textPrimary px-3 py-1 text-xs transition-theme"
+          >
+            {examplePrompt.text}
+          </button>
+        ))}
       </div>
     </div>
   );
